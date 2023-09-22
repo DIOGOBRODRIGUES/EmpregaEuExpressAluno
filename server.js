@@ -1,16 +1,7 @@
-const http = require ("http") //
-const port = 4000; //no servididor local podemos utilizar quqalquer porta
+import app from './src/app.js' 
+const port = process.env.PORT || 3000; //defin porta para o ambiente de produção ou teste 
 
-const rotas ={
-    '/' :'Bem vindos empregaEu',
-    '/Cadastro': 'Tela de cadastro',
-    '/Vagas': 'Lista de vagas'
-}
-const server = http.createServer((req, res)=>{
-    res.writeHead(200, {'Content-Type': 'text/plain'})
-    res.end(rotas[req.url]);
-})
 
-server.listen(port, () => {
+app.listen(port, () => {
     console.log(`Servidor escutando em http://localhost:${port}`)
   })
