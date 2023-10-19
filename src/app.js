@@ -1,5 +1,16 @@
 import express from "express";
+import connectDatabase from "./Config/dbconect.js";
+ import vaga from "./models/vagas.js";
 
+const conexao = await connectDatabase();
+
+conexao.on("error", (erro)=>{
+  console.error("erro de conexão", erro)
+})
+
+conexao.once("open",  ()=>{
+  console.log("conexao com banco de dados ok :D")
+})
 const app = express();
 app.use(express.json())
 const vagas = [
@@ -9,8 +20,11 @@ const vagas = [
   app.get('/', (req, res) => {
     res.status(200).send('Inicio EmpregaEU');
   }) 
-  app.get('/vagas', (req, res) => {
-      res.status(200).json(vagas)
+
+  
+  app.get('/vagas', async(req, res) => {
+    const listaVagas = await vaga.find({});
+      res.status(200).json(listaVagas);
   })
 
   app.post('/vagas', (req, res) => {

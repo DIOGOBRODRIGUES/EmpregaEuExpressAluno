@@ -1,0 +1,19 @@
+schema
+import mongoose from "mongoose";
+
+const vagaSchema = new  mongoose.Schema({
+    ind:{type: mongoose.Schema.Types.ObjectId},
+    titulo: {type: mongoose.Schema.Types.String, require: true},
+    empresa: {type: mongoose.Schema.Types.String, require: true},
+    salario: {type: mongoose.Schema.Types.Number, require: true},
+}, {versionKey:false});
+
+const vaga =  mongoose.model("Vagas", vagaSchema);
+
+export default vaga;
+
+//atualizacao  do get
+app.get('/vagas', async(req, res) => {
+    const listaVagas = await vaga.find({});
+      res.status(200).json(vagas)
+  })
