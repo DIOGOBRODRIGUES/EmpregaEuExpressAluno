@@ -1,6 +1,8 @@
 import express from "express";
 import connectDatabase from "./Config/dbconect.js";
- import vaga from "./models/vagas.js";
+ //import vaga from "./models/vagas.js";  --nao preciso mais importa vaga do model
+
+ import routes from "./routes/index.js";
 
 const conexao = await connectDatabase();
 
@@ -12,20 +14,24 @@ conexao.once("open",  ()=>{
   console.log("conexao com banco de dados ok :D")
 })
 const app = express();
-app.use(express.json())
+//chamar as rotas passando o APP instancia do express servidor  
+routes(app);
+//app.use(express.json())   ---DELETAR  --agora esta estruturado no controller e routes
 const vagas = [
     {id: 1, "titulo": "Dev back-end"},
     {id: 2, "titulo": "Dev Mobile"}
   ]
-  app.get('/', (req, res) => {
-    res.status(200).send('Inicio EmpregaEU');
-  }) 
 
-  
-  app.get('/vagas', async(req, res) => {
-    const listaVagas = await vaga.find({});
-      res.status(200).json(listaVagas);
-  })
+  //DELETAR
+  // app.get('/', (req, res) => {
+  //   res.status(200).send('Inicio EmpregaEU');
+  // }) 
+
+  //agora esta estruturado no controller e routes 
+  // app.get('/vagas', async(req, res) => {
+  //   const listaVagas = await vaga.find({});
+  //     res.status(200).json(listaVagas);
+  // })
 
   app.post('/vagas', (req, res) => {
     vagas.push(req.body);
