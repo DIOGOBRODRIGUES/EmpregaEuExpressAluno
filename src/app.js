@@ -1,6 +1,7 @@
 import express from "express";
 import connectDatabase from "./Config/dbconect.js";
- import vaga from "./models/vagas.js";
+//import vaga from "./models/vagas.js"; --- nao precisa importar modelo de vaga
+import routes from "./routes/index.js";
 
 const conexao = await connectDatabase();
 
@@ -12,7 +13,8 @@ conexao.once("open",  ()=>{
   console.log("conexao com banco de dados ok :D")
 })
 const app = express();
-app.use(express.json())
+routes(app);
+//app.use(express.json())
 const vagas = [
     {id: 1, "titulo": "Dev back-end"},
     {id: 2, "titulo": "Dev Mobile"}
@@ -21,11 +23,11 @@ const vagas = [
     res.status(200).send('Inicio EmpregaEU');
   }) 
 
-  
-  app.get('/vagas', async(req, res) => {
-    const listaVagas = await vaga.find({});
-      res.status(200).json(listaVagas);
-  })
+  // foi para camadas do controller e rotas 
+  // app.get('/vagas', async(req, res) => {
+  //   const listaVagas = await vaga.find({});
+  //     res.status(200).json(listaVagas);
+  // })
 
   app.post('/vagas', (req, res) => {
     vagas.push(req.body);
