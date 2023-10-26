@@ -8,5 +8,9 @@ const routes = express.Router();
 
 //passar a rota e controlador como parametro 
 routes.get("/vagas", vagasController.listarVagas);
+routes.get("/vagas/:id", vagasController.listarVagasPorId);
+routes.post("/vagas", vagasController.cadastrarVaga);
+routes.put("/vagas/:id", vagasController.atualizarVaga);
+routes.delete("/vagas/:id", vagasController.excluirVaga);
 
 export default routes; //exportar para ser utilizado em outro arquivo

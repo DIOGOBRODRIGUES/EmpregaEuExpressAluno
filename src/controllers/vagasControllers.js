@@ -23,13 +23,29 @@ class VagasController {
      Criar método de listarVagas que recebe dois parametros, será nosso controlador
      que vai manejar as requisicoes e respostas
      */
-
-    
-    static async listarVagas(req, res){
+     static async listarVagas(req, res){
+    try{
       const listaVagas = await vaga.find({});
       res.status(200).json(listaVagas);
+    }catch(erro){
+      res.status(500).json({message: `Erro ao listar vagas - ${erro.message}`});
+    
+    }
     } 
 
+    //criar listar vagas por id 
+    static async listarVagasPorId(req, res){
+      try{
+        //id vai guardar a id passada na requisção 
+        const id =  req.params.id;
+        //findById método mogoose para buscar por id
+        const vagaEncontrada = await vaga.findById({id});
+        res.status(200).json(vagaEncontrada);
+      }catch(erro){
+        res.status(500).json({message: `Erro ao lista vaga - ${erro.message}`});
+      
+      }
+      } 
     //criando controller para cadastro dentro de um bloco try catch
     /* manejo de erro sucesso*/
     static async cadastrarVaga(req,res){
@@ -47,6 +63,38 @@ class VagasController {
             res.status(500).json({error:`${erro.message} -falha ao cadatrar vaga`, });
         }
     }
+
+      //criar atualizar vagas por id 
+      static async atualizarVaga(req, res){
+        try{
+          /*id vai guardar a id passada na requisção 
+          findByIdAndUpdate método moogose que recebe dois parâmetros
+          a id e os dados da vaga atualizada.
+          */
+          const id =  req.params.id;
+          await vaga.findByIdAndUpdate(id, req.body);
+          res.status(200).json({message: `Vaga atualizada com sucesso!`});
+        }catch(erro){
+          res.status(500).json({message: `Erro ao lista vaga - ${erro.message}`});
+        
+        }
+        } 
+
+          // deletar vagas 
+      static async excluirVaga(req, res){
+        try{
+          /*id vai guardar a id passada na requisção 
+          findByIdAndDelete método moogose que recebe dois parâmetros
+          a id e os dados da vaga que será deletada.
+          */
+          const id =  req.params.id;
+          await vaga.findByIdAndDelete(id, req.body);
+          res.status(200).json({message: `Vaga excluida com sucesso!`});
+        }catch(erro){
+          res.status(500).json({message: `Erro ao deletar vaga - ${erro.message}`});
+        
+        }
+        } 
 }
 
 //exportar clase para ser utilizadas em outras partes 
