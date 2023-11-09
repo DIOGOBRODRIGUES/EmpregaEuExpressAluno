@@ -2,6 +2,7 @@ import express from "express";
 import connectDatabase from "./Config/dbconect.js";
 //import vaga from "./models/vagas.js"; --- nao precisa importar modelo de vaga
 import routes from "./routes/index.js";
+import cors from "cors";
 
 const conexao = await connectDatabase();
 
@@ -13,6 +14,8 @@ conexao.once("open",  ()=>{
   console.log("conexao com banco de dados ok :D")
 })
 const app = express();
+// * todas as origens permitidas 
+app.use(cors({origin:"*"}))
 routes(app);
 //app.use(express.json())
 // const vagas = [
