@@ -17,10 +17,10 @@ const app = express();
 //chamar as rotas passando o APP instancia do express servidor  
 routes(app);
 //app.use(express.json())   ---DELETAR  --agora esta estruturado no controller e routes
-const vagas = [
-    {id: 1, "titulo": "Dev back-end"},
-    {id: 2, "titulo": "Dev Mobile"}
-  ]
+// const vagas = [
+//     {id: 1, "titulo": "Dev back-end"},
+//     {id: 2, "titulo": "Dev Mobile"}
+//   ]
 
   //DELETAR
   // app.get('/', (req, res) => {
