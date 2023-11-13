@@ -1,7 +1,7 @@
 import express from "express";
 import connectDatabase from "./Config/dbconect.js";
  //import vaga from "./models/vagas.js";  --nao preciso mais importa vaga do model
-
+ import cors from "cors";
  import routes from "./routes/index.js";
 
 const conexao = await connectDatabase();
@@ -13,7 +13,10 @@ conexao.on("error", (erro)=>{
 conexao.once("open",  ()=>{
   console.log("conexao com banco de dados ok :D")
 })
+
 const app = express();
+// * todas as origens permitidas
+app.use(cors({origin:"*"}))
 //chamar as rotas passando o APP instancia do express servidor  
 routes(app);
 //app.use(express.json())   ---DELETAR  --agora esta estruturado no controller e routes

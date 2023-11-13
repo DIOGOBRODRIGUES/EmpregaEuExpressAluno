@@ -1,12 +1,13 @@
 import mongoose from "mongoose";
 //importando modulo especifico  
-import {empresaSchema} from "./empresa.js"
+//import {empresaSchema} from "./empresa.js"
 const vagaSchema  = new mongoose.Schema({
     id:{type: mongoose.Schema.Types.ObjectId},
     titulo:{type: String, required: true},
     //dicionando a propiedade empresaSchema
     //juntar dois shcemas 
-    empresa:empresaSchema,
+    //empresa:empresaSchema,
+    empresa:{type: String, required: true},
     salario: {type: Number}
 },{versionKey:false}
 );
