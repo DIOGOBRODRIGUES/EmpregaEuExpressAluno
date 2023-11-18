@@ -6,8 +6,8 @@ const vagaSchema  = new mongoose.Schema({
     titulo:{type: String, required: true},
     //dicionando a propiedade empresaSchema
     //juntar dois shcemas 
-    //empresa:empresaSchema,
-    empresa:{type: String, required: true},
+    empresa:empresaSchema,
+    // empresa:{type: String, required: true},
     salario: {type: Number}
 },{versionKey:false}
 );
