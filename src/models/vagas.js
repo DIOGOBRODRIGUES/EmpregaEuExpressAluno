@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
-//importando modulo especifico  
-//import {empresaSchema} from "./empresa.js"
+//importando modulo especifico  adicionando schema como propriedade 
+import {empresaSchema} from "../models/empresa.js"
 const vagaSchema  = new mongoose.Schema({
     id:{type: mongoose.Schema.Types.ObjectId},
     titulo:{type: String, required: true},

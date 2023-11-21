@@ -3,7 +3,7 @@
 
 import express from 'express';
 import vagas from '../routes/vagasRoutes.js'; // importando rotas de vagas
-
+import empresa  from '../routes/empresaRoutes.js'
 
 /*
 agrupando todas as rotas que vamos receber
@@ -14,6 +14,6 @@ const routes =(app)=>{
 
     //use é um metodo utilizado pra incluir um middleware na instancia do express
     //dois parametros,  o middleware json  e a rotas  que esta em vagasRoutes.js
-    app.use(express.json(), vagas)
+    app.use(express.json(), vagas, empresa)
 };
 export default routes;

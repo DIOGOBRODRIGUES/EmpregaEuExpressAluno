@@ -1,4 +1,5 @@
 //import do modelo de vaga criado  na camada models 
+import { empresa } from "../models/empresa.js";
 import vaga from "../models/vagas.js";
 
 /*Criando nossa Classe lembrando que comecamos com letra maiuscula, a classe 
@@ -49,13 +50,21 @@ class VagasController {
     //criando controller para cadastro dentro de um bloco try catch
     /* manejo de erro sucesso*/
     static async cadastrarVaga(req,res){
+      //agora depois de criar o model de empresa
+      //vamos salvar o corpo da requisição na vagaNova
+      const vagaNova = req.body;
+
         try{
             /* vaga é o modelo criado na camada models no mogoose e create é um metodo do mogoose
             para criar uma vaga la no banco e objeto de vaga é passado dento do req.body */
-            const vagaNova = await vaga.create(req.body);
-
+            //const vagaNova = await vaga.create(req.body);
+            const empresaEncontrada = await empresa.findById(vagaNova.empresa)
+            // montar para ir ao banco 
+            //...sprat operatiom 
+            const vagaCompleta ={...vagaNova, empresa:{...empresaEncontrada._doc}}
+            const vagaCriada = await vaga.create(vagaCompleta);
             //vagaNova é o retorno do metodo create do objeto criado 
-            res.status(201).send({message: 'Vaga cadastrada com sucesso!', vaga: vagaNova});
+            res.status(201).json({message: 'Vaga cadastrada com sucesso!', vaga: vagaCriada});
         }
         catch(erro){
             // 500 erro interno do servidor  

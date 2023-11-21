@@ -9,5 +9,5 @@ const empresaSchema  = new mongoose.Schema({
 );
 //criando modelo mogoose
 const empresa =  mongoose.model("Empresa", empresaSchema);
-//export do modelo empresa 
-export default {empresa, empresaSchema};
+//export do modelo empresa e também seu Shchema, pois posso importar como propriedade de vaga  
+export  {empresa, empresaSchema};
